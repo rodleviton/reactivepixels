@@ -17,7 +17,7 @@ Then include `jquery.reactivepixels.js`.
 
 Now you are ready to get everything working. You will need to create a html page with any number of elements. To make them work together they will need to all share the same class e.g. `.block`. 
 
-To initialise the plugin all you need to do it choose the appropriate jQuery selector and call the 'reactivePixels()' plugin like so:
+To initialise the plugin all you need to do is choose the appropriate selector and call the **Reactive Pixels** plugin like so:
 
     $(function() {
         $('.block').reactivePixels();
@@ -25,4 +25,4 @@ To initialise the plugin all you need to do it choose the appropriate jQuery sel
 
 * * *
 
-Copyright (c) 2013 Rod Leviton
+Copyright &copy; 2013 Rod Leviton
