@@ -1,18 +1,26 @@
-;
+/**
+ * jQuery Reactive Pixels v0.9.1
+ * An intelligent jQuery pixel plugin
+ * https://github.com/rodleviton/reactivepixels
+ *
+ * Licensed under the MIT license.
+ * Copyright 2013 Rod Leviton
+ */
 (function($, window, document, undefined) {
-
+    "use strict"; // jshint
+    
     // Create the defaults once
     var reactivePixels = "reactivePixels",
         defaults = {
             delay: 400,
             offset: 10,
-            timer: {},
-            selector: '.block'
+            timer: {}
         };
 
-    function Plugin(element, options) {
+    function Plugin(element, options, selector) {
         this.element = $(element);
         this.options = $.extend({}, defaults, options);
+        this._selector = selector;
         this._defaults = defaults;
         this._name = reactivePixels;
         this.init();
@@ -34,7 +42,7 @@
             });
         },
 
-        enter: function(e) {
+        enter: function() {
             var that = this;
             this.element.stop(); // Stop any current animations
             this.check();
@@ -44,11 +52,11 @@
             }, this._defaults.delay);
         },
 
-        leave: function(e) {
+        leave: function() {
             var that = this;
             clearInterval(this.timer); // Clear any existing timers
 
-            $('.block').each(function(index, value) {
+            $(this._selector).each(function(index, value) {
                 $(value).stop().animate({
                     'top': $(value).data('top'),
                     'left': $(value).data('left')
@@ -61,9 +69,9 @@
             var that = this;
             clearInterval(this.timer); // Clear timer
 
-            $('.block').each(function(index, value) {
+            $(this._selector).each(function(index, value) {
                 var el2 = $(value);
-                if (el2[0] != that.element[0]) {
+                if (el2[0] !== that.element[0]) {
                     if (that.collision(that.element, el2)) {
                         var coords = that.getArea(that.element, el2);
                         that.animate(el2, coords);
@@ -91,8 +99,11 @@
             var b2 = y2 + h2;
             var r2 = x2 + w2;
 
-            if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
-            return true;
+            if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) { 
+                return false;
+            } else {
+                return true;
+            }
         },
 
         // Calculate area of overlap and direction to remove overlap
@@ -165,12 +176,16 @@
                 'left': ($(el).offset().left + (leftPos + offset))
             }, 300, 'swing');
         }
+        
+        //TODO
+        //ADD RESIZE HANDLER
     };
 
     $.fn[reactivePixels] = function(options) {
+        var selector = this.selector;
         return this.each(function() {
             if (!$.data(this, "plugin_" + reactivePixels)) {
-                $.data(this, "plugin_" + reactivePixels, new Plugin(this, options));
+                $.data(this, "plugin_" + reactivePixels, new Plugin(this, options, selector));
             }
         });
     };
