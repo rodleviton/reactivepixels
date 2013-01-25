@@ -1,7 +1,7 @@
 Reactive Pixels
 ===============
 
-An intelligent jQuery pixels plugin
+An intelligent jQuery pixel plugin
 
 Reactive Pixels is a jQuery plugin that enables elements on a page to interact with surrounding elements. The plugin can be used across many various implementations.
 
