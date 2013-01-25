@@ -23,6 +23,9 @@ To initialise the plugin all you need to do is choose the appropriate selector a
         $('.block').reactivePixels();
     });
 
+###Important
+**Reactive Pixels** is in its early stages of development. If you come across any issues or would like to request any features please contact me through my blog feedback form [http://rodleviton.com/blog/reactive-pixels](http://rodleviton.com/blog/reactive-pixels).
+
 * * *
 
 Copyright &copy; 2013 Rod Leviton
